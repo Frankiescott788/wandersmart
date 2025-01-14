@@ -21,3 +21,11 @@ export interface ContextDefault {
     isLoading: boolean;
     setIsLoading: (isLoading: boolean) => void;
 }
+export interface Destination {
+    name: string;
+    description: string;
+    address: string;
+    category: string;
+    coordinates: [number, number];
+    image: string;
+}

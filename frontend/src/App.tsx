@@ -19,7 +19,7 @@ export default function App() : ReactElement {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<DashboardLayout />}>
+                <Route path={"/"} element={isAuthenticated ?<DashboardLayout /> : <Navigate to={"/signin"}/>}>
                     <Route index element={<Overview />}/>
                 </Route>
                 <Route path="/signin" element={isAuthenticated ? <Navigate to={"/"}/> :<Signin />}/>

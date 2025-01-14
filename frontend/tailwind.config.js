@@ -14,6 +14,9 @@ module.exports = {
       colors: {
         customBlue: '#19AFFF',
       },
+      boxShadow: {
+        custom: '0px 16px 37px -18px #19afff',
+      },
     },
   },
   daisyui: {

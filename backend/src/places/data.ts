@@ -5,7 +5,7 @@ export const places = [
     address: "Kruger National Park, Mpumalanga, South Africa",
     category: "Safari",
     coordinates: [-23.9884, 31.5547],
-    image: "https://images.pexels.com/photos/5214036/pexels-photo-5214036.jpeg?auto=compress&cs=tinysrgb&w=400"
+    image: "https://cdn.pixabay.com/photo/2017/10/13/14/28/south-africa-2847776_1280.jpg"
   },
   {
     name: "Blyde River Canyon",

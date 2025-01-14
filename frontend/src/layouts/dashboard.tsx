@@ -5,6 +5,8 @@ import Content from "@/components/dashboard/main.tsx";
 import NavDashboard from "@/components/dashboard/nav.tsx";
 import CutePic from "@/assets/images/Whimsical 3D Scene with Abstract Shapes.jpeg"
 
+import {motion} from "framer-motion"
+
 export default function DashboardLayout(): ReactElement {
   return (
     <div className={"h-screen"}>
@@ -18,7 +20,7 @@ export default function DashboardLayout(): ReactElement {
             <Image src={Logo} className={"w-[15rem] object-cover"} />
           </div>
           <ul className={"flex flex-col px-2 gap-2"}>
-            <li className={"flex gap-2 bg-[#19AFFF] p-3 rounded-lg"}>
+            <motion.li className={"flex gap-2 bg-[#19AFFF] shadow-custom  p-3 rounded-lg"} initial={{ scale : 0 }} animate={{ scale : 1 }} transition={{ delay : 1 * 0.2 }}>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -53,8 +55,8 @@ export default function DashboardLayout(): ReactElement {
               <div>
                 <p className={`text-white`}>Dashboard</p>
               </div>
-            </li>
-            <li className={"flex gap-2 p-3 rounded-lg"}>
+            </motion.li>
+            <motion.li className={"flex gap-2 p-3 rounded-lg"} initial={{ scale : 0 }} animate={{ scale : 1 }} transition={{ delay : 2 * 0.2 }}>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +81,8 @@ export default function DashboardLayout(): ReactElement {
               <div>
                 <p className="pt-1 text-gray-300">Explore</p>
               </div>
-            </li>
-            <li className={"flex gap-2 p-3 rounded-lg"}>
+            </motion.li>
+            <motion.li className={"flex gap-2 p-3 rounded-lg"} initial={{ scale : 0 }} animate={{ scale : 1 }} transition={{ delay : 3 * 0.2 }}>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,8 +104,8 @@ export default function DashboardLayout(): ReactElement {
               <div>
                 <p className="text-gray-300">Saved</p>
               </div>
-            </li>
-            <li className={"flex gap-2 p-3 rounded-lg"}>
+            </motion.li>
+            <motion.li className={"flex gap-2 p-3 rounded-lg"} initial={{ scale : 0 }} animate={{ scale : 1 }} transition={{ delay : 4 * 0.2 }}>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +131,7 @@ export default function DashboardLayout(): ReactElement {
               <div>
                 <p className="text-gray-300"> Settings</p>
               </div>
-            </li>
+            </motion.li>
           </ul>
           <div className="flex justify-center mt-10">
             <div>
