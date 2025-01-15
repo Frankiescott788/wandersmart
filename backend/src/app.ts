@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: ["https://travelwandersmart.vercel.app", "https://wandersmart-1.onrender.com"],
-    credentials: true
+    credentials: true,
+    exposedHeaders: ["set-cookie"]
 }));
+
 
 const db = mongoose.connection;
 
