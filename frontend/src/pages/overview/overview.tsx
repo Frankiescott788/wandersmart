@@ -1,6 +1,5 @@
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import {
-  Alert,
   Button,
   Card,
   CardBody,
@@ -12,17 +11,15 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import CPT from "@/assets/images/cape-town-4620987.jpg";
 import { Location } from "iconsax-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { Destination } from "@/types/types";
 import useLocation from "@/hooks/useLocation";
 import { AuthContext } from "@/context/Authprovider";
 import { motion } from "framer-motion";
-import AI from "@/assets/images/Cute_Cartoon_Character-removebg-preview.png";
 import useWeather, { HourlyData } from "@/hooks/useWeather";
 import { useNavigate } from "react-router-dom";
 
@@ -80,14 +77,14 @@ export default function Overview({
     };
   }, [center, zoom]);
 
-  const { weather, hourly, loading, fetchWeather, getCurrentWeather } = useWeather();
+  const { weather, hourly,  getCurrentWeather } = useWeather();
   const navigate = useNavigate();
 
   useEffect(() => {
     getCurrentWeather(currentLocation.latitude as number, currentLocation.longitude as number);
   }, []);
 
-  const { onClose, onOpen, onOpenChange, isOpen } = useDisclosure();
+  const {  onOpen,  isOpen } = useDisclosure();
 
   const getPlaces = async () => {
     const res = await axios.get("http://localhost:8080/api/places", {
@@ -96,7 +93,7 @@ export default function Overview({
     return res;
   };
 
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["places"],
     queryFn: getPlaces,
   });

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BASE_URL =
-  "https://api.openweathermap.org/data/2.5/weather?q=Polokwane&appid=6fcaddaefdf79e82f2dd23bb74194ed6&units=metric";
+
 
 interface WeatherData {
   temperature: number;

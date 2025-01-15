@@ -1,7 +1,6 @@
 import { ReactElement, useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Location } from "iconsax-react";
 
 interface MapComponentProps {
   center: [number, number];
