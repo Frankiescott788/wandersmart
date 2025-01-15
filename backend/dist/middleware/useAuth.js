@@ -17,7 +17,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const users_1 = __importDefault(require("../model/users"));
 function useAuth(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { authtoken } = req.cookies;
+        var _a;
+        const authtoken = req.cookies.authtoken || ((_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1]);
         try {
             if (!authtoken) {
                 return res.status(400).json({

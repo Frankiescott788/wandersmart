@@ -61,6 +61,7 @@ export const signUp = async (req: Request, res: Response): Promise<any> => {
     res.status(201).json({
       message: "Account created",
       data: createuser,
+      token
     });
   } catch (err: any) {
     console.log(err.message);
@@ -95,6 +96,7 @@ export const signIn = async (req: Request, res: Response): Promise<any> => {
     res.status(200).json({
       message: "User signed in",
       data: User,
+      token
     });
   } catch (err: any) {
     console.log(err.message);

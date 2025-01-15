@@ -62,6 +62,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(201).json({
             message: "Account created",
             data: createuser,
+            token
         });
     }
     catch (err) {
@@ -93,6 +94,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(200).json({
             message: "User signed in",
             data: User,
+            token
         });
     }
     catch (err) {

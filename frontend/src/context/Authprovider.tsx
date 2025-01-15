@@ -34,11 +34,17 @@ export default function AuthProvider ({ children } : Children) : ReactElement {
     useEffect(() => {
         const authenticate = async (): Promise<void> => {
             try {
-                const user = await axios.get("http://localhost:8080/api/currentuser",
-                    {
-                        withCredentials : true
-                    }
-                );
+                const token = localStorage.getItem("authtoken");
+                if(!token) {
+                    setIsAuthenticated(false);
+                    return;
+                }
+                const user = await axios.get("https://wandersmart-9ajk.onrender.com/api/currentuser", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    withCredentials: true
+                });
                 if(user.status === 200) {
                     setCurrentUser(user.data);
                     setIsAuthenticated(true);

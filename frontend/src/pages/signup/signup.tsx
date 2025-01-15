@@ -35,6 +35,7 @@ export default function Signup(): ReactElement {
   const mutation = useMutation({
     mutationFn: signUp,
     onSuccess: (res) => {
+      localStorage.setItem("authtoken", res.data.token);
       setCurrentUser(res.data);
       setIsAuthenticated(true);
       navigate("/");

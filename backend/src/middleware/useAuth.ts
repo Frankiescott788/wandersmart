@@ -3,7 +3,7 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 import Users from "../model/users";
 
 export default async function useAuth (req : Request, res : Response, next : NextFunction) : Promise<any>  {
-    const { authtoken } = req.cookies;
+    const authtoken = req.cookies.authtoken || req.headers.authorization?.split(' ')[1];
     try {
         if (!authtoken) {
             return res.status(400).json({
