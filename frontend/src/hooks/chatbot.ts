@@ -16,42 +16,22 @@ const model = genAI.getGenerativeModel({
 });
 
 
-
-interface Chats {
-  role: "model" | "user";
-  parts: [
-    {
-      text: string;
-    }
-  ];
-}
-
 export default function useChatbot(prompt: string) {
-  const [chats, setChats] = useState<Chats[]>([
-    {
-      role: "user",
-      parts: [{ text: "Hello"}],
-    },
-  ]);
+  const [response, setResponse] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  
   async function StartChat() {
-    const chatSession = model.startChat({
-      history: chats,
-    });
-    const result = await chatSession.sendMessage(prompt);
+    setIsTyping(true)
+    try {
+      const res = await model.generateContent(prompt);
+    setResponse(res.response.text());
+    } catch (error) {
+      throw new Error("Something is wrong")
+    } finally {
+      setIsTyping(false)
+    }
+    
 
-    setChats((prevChats) => [
-      ...prevChats,
-      {
-        role: "user",
-        parts: [{ text: prompt }],
-      },
-      {
-        role: "model",
-        parts: [{ text: result.response.text() }],
-      },
-    ]);
-
-    console.log(result.response.text());
   }
-  return { StartChat };
+  return { StartChat, response, isTyping};
 }
