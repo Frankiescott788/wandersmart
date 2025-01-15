@@ -34,7 +34,7 @@ export default function Signin(): ReactElement {
       localStorage.setItem("authtoken", res.data.token);
       setCurrentUser(res.data);
       setIsAuthenticated(true);
-      navigate("/");
+      navigate("/dashboard");
     },
     onError: (err : any) => {
       if (err.message.toLowerCase().includes("network error")) {

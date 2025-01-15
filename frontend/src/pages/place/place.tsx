@@ -46,7 +46,16 @@ export default function Place() {
 
   };
 
-  const { StartChat } = useChatbot("Hey", data);
+  const prompt = `
+    Based on the following weather data, suggest appropriate activities for the day. The data includes the current weather, hourly weather forecast, and daily weather trends. Provide detailed recommendations for outdoor and indoor activities, and explain why they are suitable for the conditions.
+
+    - City : ${data.city}
+    - Condition : ${data.description}
+    -Temparature : ${data.temp}
+  
+  `
+
+  const { StartChat } = useChatbot(prompt);
 
   if (loading) {
     return <Loading />;

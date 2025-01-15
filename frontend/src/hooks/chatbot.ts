@@ -26,7 +26,7 @@ interface Chats {
   ];
 }
 
-export default function useChatbot(prompt: string, data : any) {
+export default function useChatbot(prompt: string) {
   const [chats, setChats] = useState<Chats[]>([
     {
       role: "user",
