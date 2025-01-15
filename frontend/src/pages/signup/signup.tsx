@@ -32,7 +32,7 @@ export default function Signup(): ReactElement {
 
   const mutation = useMutation({
     mutationFn: signUp,
-    onSuccess: (res) => {
+    onSuccess: () => {
       navigate("/dashboard/");
     },
     onError: (err : AuthResErrors) => {

@@ -1,11 +1,9 @@
 import { AuthContext } from "@/context/Authprovider";
-import {BreadcrumbItem, Breadcrumbs, Button, User} from "@nextui-org/react";
+import { BreadcrumbItem, Breadcrumbs, User } from "@nextui-org/react";
 import { useContext } from "react";
 
-export default function NavDashboard () {
-
+export default function NavDashboard() {
     const { currentuser } = useContext(AuthContext);
-
 
     return (
         <header className={"fixed top-0 left-[17.5rem] right-0 border-b  bg-white border-l border-gray-100 hidden lg:block"}>
@@ -17,12 +15,9 @@ export default function NavDashboard () {
                     </Breadcrumbs>
                 </div>
                 <div>
-                    
-                    <User name={currentuser?.username}
-                          description={currentuser?.email}
-                    />
+                    <User name={currentuser?.username} description={currentuser?.email} />
                 </div>
             </div>
         </header>
-    )
+    );
 }

@@ -28,7 +28,7 @@ export default function Signin(): ReactElement {
 
   const mutation = useMutation({
     mutationFn: signIn,
-    onSuccess: (res) => {
+    onSuccess: () => {
       navigate("/dashboard/");
     },
     onError: (err : any) => {

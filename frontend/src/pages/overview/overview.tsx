@@ -257,7 +257,7 @@ export default function Overview({
         </div>
         <Modal size="full" isOpen={isOpen}>
           <ModalContent>
-            {(onClose) => (
+            {() => (
               <>
                 <ModalHeader>
                   <p>Modal</p>

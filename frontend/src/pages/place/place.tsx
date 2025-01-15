@@ -24,14 +24,13 @@ export default function Place() {
     daily,
     loading,
     hourly,
-    fetchHourly,
     fetchWeather,
     weather,
     coordinates,
   } = useWeather();
 
   const { id } = useParams();
-  const { onClose, isOpen, onOpen } = useDisclosure();
+  const {  isOpen, onOpen } = useDisclosure();
 
   const [isDisplayed, setIsPlayed] = useState(false);
 
@@ -122,6 +121,7 @@ export default function Place() {
                     <Card
                       className="col-span-12 lg:col-span-3 border-5 border-gray-100"
                       shadow="none"
+                      key={i}
                     >
                       <CardBody className="text-center">
                         <p className="text-default-400">
@@ -165,7 +165,7 @@ export default function Place() {
       </main>
       <Modal isOpen={isOpen} size="5xl">
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader>
                 <p className="text-4xl">LuminaAI</p>
