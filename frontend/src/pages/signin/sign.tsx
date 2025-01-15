@@ -2,7 +2,6 @@ import {
   BreadcrumbItem,
   Breadcrumbs,
   Button,
-  Checkbox,
   Image,
   Input,
 } from "@nextui-org/react";
@@ -29,7 +28,7 @@ export default function Signin(): ReactElement {
   const mutation = useMutation({
     mutationFn: signIn,
     onSuccess: () => {
-      navigate("/dashboard/");
+      navigate("/");
     },
     onError: (err : any) => {
       if (err.message.toLowerCase().includes("network error")) {
@@ -115,31 +114,23 @@ export default function Signin(): ReactElement {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className="flex pt-2 px-2">
-                  <Checkbox />
-                  <p className="text-sm mt-1 text-default-400">
-                    I've read{" "}
-                    <span className="text-customBlue">
-                      terms and conditions
-                    </span>
-                  </p>
-                </div>
+                
                 <div className="flex justify-center py-4">
                   <Button
                     className="bg-customBlue w-full py-[30px] text-white"
                     onPress={MutateSignup}
                     isLoading={mutation.isPending}
                   >
-                    Sign up
+                    Sign in
                   </Button>
                 </div>
                 <p className="text-default-400 text-center">
-                  Already have an account?{" "}
+                  Don't have an account?{" "}
                   <Link
-                    to={"/signin"}
+                    to={"/signup"}
                     className="text-customBlue font-semibold"
                   >
-                    Sign in
+                    Sign up
                   </Link>
                 </p>
               </div>

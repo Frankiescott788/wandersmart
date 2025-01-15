@@ -33,7 +33,7 @@ export default function Signup(): ReactElement {
   const mutation = useMutation({
     mutationFn: signUp,
     onSuccess: () => {
-      navigate("/dashboard/");
+      navigate("/");
     },
     onError: (err : AuthResErrors) => {
       if (err.message.toLowerCase().includes("network error")) {
