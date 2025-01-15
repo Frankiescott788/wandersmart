@@ -21,7 +21,7 @@ export default function App() : ReactElement {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Landing />}/>
+                <Route path="/" element={isAuthenticated ?<Navigate to={"/dashboard"}/> :<Landing />}/>
                 <Route path={"/dashboard"} element={isAuthenticated ?<DashboardLayout /> : <Navigate to={"/signin"}/>}>
                     <Route index element={<Overview />}/>
                 </Route>

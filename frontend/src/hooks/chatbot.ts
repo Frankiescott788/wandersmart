@@ -30,12 +30,7 @@ export default function useChatbot(prompt: string, data : any) {
   const [chats, setChats] = useState<Chats[]>([
     {
       role: "user",
-      parts: [{ text: `
-          Based on the following weather data, suggest appropriate activities for the day. The data includes the current weather, hourly weather forecast, and daily weather trends. Provide detailed recommendations for outdoor and indoor activities, and explain why they are suitable for the conditions.
-          -the temprature is ${data.temp}
-          - city ${data.city}
-        
-        ` }],
+      parts: [{ text: "Hello"}],
     },
   ]);
   async function StartChat() {
