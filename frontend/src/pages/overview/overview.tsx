@@ -87,8 +87,9 @@ export default function Overview({
   const {  onOpen,  isOpen } = useDisclosure();
 
   const getPlaces = async () => {
-    const res = await axios.get("http://localhost:8080/api/places", {
-      withCredentials: true,
+    
+    const res = await axios.get("https://wandersmart-9ajk.onrender.com/api/places", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("authtoken")}` }
     });
     return res;
   };
