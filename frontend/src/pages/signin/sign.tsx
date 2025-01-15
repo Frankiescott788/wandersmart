@@ -32,7 +32,7 @@ export default function Signin(): ReactElement {
     mutationFn: signIn,
     onSuccess: (res) => {
       localStorage.setItem("authtoken", res.data.token);
-      setCurrentUser(res.data);
+      setCurrentUser(res.data.data);
       setIsAuthenticated(true);
       navigate("/dashboard");
     },
