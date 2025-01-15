@@ -7,6 +7,7 @@ import Signup from "./pages/signup/signup.tsx";
 import Signin from "./pages/signin/sign.tsx";
 import { AuthContext } from "./context/Authprovider.tsx";
 import Loading from "./components/loading.tsx";
+import Place from "./pages/place/place.tsx";
 
 export default function App() : ReactElement {
 
@@ -24,6 +25,7 @@ export default function App() : ReactElement {
                 </Route>
                 <Route path="/signin" element={isAuthenticated ? <Navigate to={"/"}/> :<Signin />}/>
                 <Route path="/signup" element={isAuthenticated ? <Navigate to={"/"}/> : <Signup />} />
+                <Route path="/place/:id" element={<Place />}/>
             </Routes>
         </BrowserRouter>
     )

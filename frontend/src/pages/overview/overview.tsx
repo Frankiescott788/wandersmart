@@ -1,5 +1,17 @@
-import { ReactElement, useContext, useEffect, useRef } from "react";
-import { Alert, Button, Card, CardBody, Image, Input } from "@nextui-org/react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  Button,
+  Card,
+  CardBody,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 import CPT from "@/assets/images/cape-town-4620987.jpg";
 import { Location } from "iconsax-react";
 import L from "leaflet";
@@ -11,7 +23,8 @@ import useLocation from "@/hooks/useLocation";
 import { AuthContext } from "@/context/Authprovider";
 import { motion } from "framer-motion";
 import AI from "@/assets/images/Cute_Cartoon_Character-removebg-preview.png";
-import useWeather from "@/hooks/useWeather";
+import useWeather, { HourlyData } from "@/hooks/useWeather";
+import { useNavigate } from "react-router-dom";
 
 interface LeafletMapProps {
   center?: [number, number];
@@ -67,7 +80,14 @@ export default function Overview({
     };
   }, [center, zoom]);
 
-  const { weather } = useWeather();
+  const { weather, hourly, loading, fetchWeather, getCurrentWeather } = useWeather();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getCurrentWeather(currentLocation.latitude as number, currentLocation.longitude as number);
+  }, []);
+
+  const { onClose, onOpen, onOpenChange, isOpen } = useDisclosure();
 
   const getPlaces = async () => {
     const res = await axios.get("http://localhost:8080/api/places", {
@@ -83,30 +103,51 @@ export default function Overview({
 
   const places: Destination[] = data?.data;
 
+  const [search, setSearch] = useState("");
+
+  function handleSearch() {
+    navigate("/place/" + search.toLowerCase());
+  }
+
   return (
     <section className={"lg:py-4 px-1 lg:pe-5"}>
       <div className="lg:flex justify-between">
         <div className="lg:pt-3">
-          <p className={"text-3xl text-default-500"}>Good Morning, {currentuser?.username}</p>
+          <p className={"text-3xl text-default-500"}>
+            Good Morning, {currentuser?.username}
+          </p>
           <p className={"text-default-400"}>
             Welcome back and explore the world
           </p>
         </div>
         <div className="flex lg:border border-dashed border-gray-200 lg:p-3 my-3 lg:my-0 rounded-xl">
-          <img src={`https://openweathermap.org/img/wn/${weather?.icon}.png`} className="h-[3rem] object-cover"/>
+          <img
+            src={`https://openweathermap.org/img/wn/${weather?.icon}.png`}
+            className="h-[3rem] object-cover"
+          />
           <div>
-          <p>{weather?.description}</p>
-          <p>{weather?.temperature}</p>
+            <p>{weather?.description}</p>
+            <p>{weather?.temperature}</p>
           </div>
-          
         </div>
+      </div>
+      <div>
+        <Input
+          className="lg:w-[25rem]"
+          placeholder="Search..."
+          size="lg"
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          handleSearch();
+        }
+          }}
+        />
       </div>
       <div>
         <div className="lg:flex justify-between pb-5 pt-2 lg:py-5 px-2 lg:px-0">
           <p className={"text-2xl py-3 lg:pt-2"}>Discover Places🌈</p>
-          <div>
-            <Input className="lg:w-[25rem]" placeholder="Search..." />
-          </div>
+          
         </div>
 
         <div className={"grid grid-cols-12 gap-5"}>
@@ -143,7 +184,12 @@ export default function Overview({
                     </p>
                     <div className={"flex justify-center py-2"}>
                       <Button
-                        className={"w-full bg-customBlue text-white py-5 shadow-custom"}
+                        className={
+                          "w-full bg-customBlue text-white py-5 shadow-custom"
+                        }
+                        onPress={() => {
+                          onOpen();
+                        }}
                       >
                         {" "}
                         View{" "}
@@ -156,7 +202,9 @@ export default function Overview({
         </div>
         <div className={"grid grid-cols-12 py-4 gap-5"}>
           <div className={"col-span-12 lg:col-span-8"}>
-            <p className="text-2xl py-3">Your Location</p>
+            <div>
+              <p className="text-2xl py-3">Your Location</p>
+            </div>
             <Card>
               <div
                 ref={mapContainer}
@@ -173,8 +221,13 @@ export default function Overview({
             >
               {!isLoading &&
                 places.slice(5, 9).map((place, i) => (
-                  <motion.div key={i} initial={{ y : 50 }} animate={{ y : 0 }} transition={{ delay : i * 0.5 }}>
-                    <Card className="" shadow="none" >
+                  <motion.div
+                    key={i}
+                    initial={{ y: 50 }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: i * 0.5 }}
+                  >
+                    <Card className="" shadow="none">
                       <div className="flex ">
                         <div className="p-2">
                           <Image
@@ -205,6 +258,32 @@ export default function Overview({
             </Card>
           </div>
         </div>
+        <Modal size="full" isOpen={isOpen}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader>
+                  <p>Modal</p>
+                </ModalHeader>
+                <ModalBody>
+                  <div className="flex">
+                  {!isLoading && hourly?.length > 0 ? (
+                    hourly.slice(0, 10).map((hour: HourlyData, i: number) => (
+                      <Card key={i} className="p-4">
+                        <p>{new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric' }).format(new Date(hour.time))}</p>
+                        <p>{hour.emoji}</p>
+                      </Card>
+                    ))
+                  ) : (
+                    <p>No data available</p>
+                  )}
+                  </div>
+                  
+                </ModalBody>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
     </section>
   );
