@@ -31,7 +31,7 @@ o	Displays an interactive map to show the user’s location and selected destina
 Setup Instructions
 1. Clone the Repository
 Clone the project repository to your local machine:
-git clone https://github.com/your-repo/wandersmart.git
+git clone https://github.com/wandersmart/wandersmart.git
 cd wandersmart
 2. Install Dependencies
 Install the necessary dependencies:
@@ -78,6 +78,5 @@ Challenges and Solutions
 •	Problem: Integrating the map without affecting the user experience.
 •	Solution: The app uses Leaflet.js and Mapbox APIs to seamlessly integrate an interactive map while maintaining a smooth user interface.
 App Preview
-•	App Link: WanderSmart Demo
-GitHub Repository
-•	Repository Link: GitHub - WanderSmart
+•	App Link: https://travelwandersmart.vercel.app/
+
