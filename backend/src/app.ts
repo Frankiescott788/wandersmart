@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended : true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin : "https://travelwandersmart.vercel.app/",
-    credentials : true
+    origin: ["https://travelwandersmart.vercel.app", "https://wandersmart-1.onrender.com"],
+    credentials: true
 }));
 
 const db = mongoose.connection;
