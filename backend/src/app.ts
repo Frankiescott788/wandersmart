@@ -3,10 +3,12 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import routes from "./routes/routes";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/travelplanner");
+mongoose.connect(process.env.DATABASE as string);
 app.use(express.urlencoded({ extended : true }));
 app.use(express.json());
 app.use(cookieParser());
