@@ -8,6 +8,7 @@ import Signin from "./pages/signin/sign.tsx";
 import { AuthContext } from "./context/Authprovider.tsx";
 import Loading from "./components/loading.tsx";
 import Place from "./pages/place/place.tsx";
+import Landing from "./pages/home/home.tsx";
 
 export default function App() : ReactElement {
 
@@ -20,7 +21,8 @@ export default function App() : ReactElement {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={isAuthenticated ?<DashboardLayout /> : <Navigate to={"/signin"}/>}>
+                <Route path="/" element={<Landing />}/>
+                <Route path={"/dashboard"} element={isAuthenticated ?<DashboardLayout /> : <Navigate to={"/signin"}/>}>
                     <Route index element={<Overview />}/>
                 </Route>
                 <Route path="/signin" element={isAuthenticated ? <Navigate to={"/"}/> :<Signin />}/>
