@@ -5,15 +5,18 @@ import {
   Image,
   Input,
 } from "@nextui-org/react";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import Logo from "@/assets/images/Logo.png";
 import useAuth from "@/hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "@/context/Authprovider";
 
 export default function Signin(): ReactElement {
   const { signIn } = useAuth();
+
+  const { setCurrentUser, setIsAuthenticated } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +30,9 @@ export default function Signin(): ReactElement {
 
   const mutation = useMutation({
     mutationFn: signIn,
-    onSuccess: () => {
+    onSuccess: (res) => {
+      setCurrentUser(res.data);
+      setIsAuthenticated(true);
       navigate("/");
     },
     onError: (err : any) => {

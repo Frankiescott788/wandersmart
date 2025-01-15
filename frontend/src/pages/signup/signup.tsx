@@ -6,17 +6,19 @@ import {
   Image,
   Input,
 } from "@nextui-org/react";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import Logo from "@/assets/images/Logo.png";
 import useAuth from "@/hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthResErrors, User } from "@/types/types";
+import { AuthContext } from "@/context/Authprovider";
 
 export default function Signup(): ReactElement {
 
   const { signUp } = useAuth();
+  const { setCurrentUser, setIsAuthenticated } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +34,9 @@ export default function Signup(): ReactElement {
 
   const mutation = useMutation({
     mutationFn: signUp,
-    onSuccess: () => {
+    onSuccess: (res) => {
+      setCurrentUser(res.data);
+      setIsAuthenticated(true);
       navigate("/");
     },
     onError: (err : AuthResErrors) => {
