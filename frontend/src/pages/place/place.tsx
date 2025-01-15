@@ -47,7 +47,7 @@ export default function Place() {
   };
 
   const prompt = `
-    Based on the following weather data, suggest appropriate activities for the day. The data includes the current weather, hourly weather forecast, and daily weather trends. Provide detailed recommendations for outdoor and indoor activities, and explain why they are suitable for the conditions.
+   Based on the following weather data, suggest appropriate activities for the day. Include nearby places for the city mentioned, along with activities that match the weather conditions. Provide reasons for both outdoor and indoor activity recommendations.
 
     - City : ${data.city}
     - Condition : ${data.description}
