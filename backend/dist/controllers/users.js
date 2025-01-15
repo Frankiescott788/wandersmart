@@ -56,7 +56,8 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.cookie("authtoken", token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             secure: true,
-            httpOnly: true
+            httpOnly: true,
+            sameSite: "none"
         });
         res.status(201).json({
             message: "Account created",
@@ -86,7 +87,8 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.cookie("authtoken", token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             secure: true,
-            httpOnly: true
+            httpOnly: true,
+            sameSite: "none",
         });
         res.status(200).json({
             message: "User signed in",

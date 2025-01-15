@@ -55,7 +55,8 @@ export const signUp = async (req: Request, res: Response): Promise<any> => {
     res.cookie("authtoken", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       secure : true,
-      httpOnly : true
+      httpOnly : true,
+      sameSite : "none"
     });
     res.status(201).json({
       message: "Account created",
@@ -88,7 +89,8 @@ export const signIn = async (req: Request, res: Response): Promise<any> => {
     res.cookie("authtoken", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       secure : true,
-      httpOnly : true
+      httpOnly : true,
+      sameSite : "none",
     });
     res.status(200).json({
       message: "User signed in",
